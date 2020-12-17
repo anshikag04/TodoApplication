@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Todo Application</h1>
+    <hr>
+    <div class="form-div">
+        <form action="/addTodo" method="POST">
+        Enter Todo : <input type="text" name="todo">
+        <button type="submit">Add Todo</button>
+        </form>
+    </div>
+    <hr>
+    <% for (let i=0; i<todos.length; i++) { %>
+    <div class="todo">
+        <span class="todoText">
+            <% if (todos[i].isDone) { %>
+                <strike><%= todos[i].yourTodo %></strike>
+            <% }
+            else {
+            %>
+            <%= todos[i].yourTodo %>
+            <% } %>
+        </span>
+        <span class="todoFunctions">
+            <form action="/doneTodo" method="POST">
+            <input type="text" name="todoID" hidden value="<%= todos[i]._id %>" >
+            <button type="submit">Done</button>
+            </form>
+            <form action="/deleteTodo" method="POST">
+            <input type="text" name="todoID" hidden value="<%= todos[i]._id %>">
+            <button type="submit">Delete</button>
+            </form>
+        </span>
+    </div>
+    <% } %>
+</body>
+</html>
